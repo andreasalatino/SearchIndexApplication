@@ -25,7 +25,7 @@ namespace SearchIndexApplication
 
 		public override string ToString()
 		{
-			return $"ID:{Id}, Title:{Title}, Description:{Description}, Link:{Link}, Price:{Price}, Brand:{Brand}, Size:{Size}, Availability:{Availability} ";
+			return $"ID:{Id},\n Title:{Title},\n Description:{Description},\n Link:{Link},\n Price:{Price},\n Brand:{Brand},\n Size:{Size},\n Availability:{Availability} ";
 		}
 	}
 }

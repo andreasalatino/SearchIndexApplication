@@ -12,7 +12,7 @@ namespace SearchIndexApp
 		static void Main(string[] args)
 		{
 			string serviceName = "boote";
-			string apiKey = "TNMgzUgbRr0cmdQqyffFMAfOe53MRCOuhUG0WXtCQhAzSeAlbXtN";
+			string apiKey = "";
 			string indexName = "product";
 
 			// Create a SearchIndexClient to send create/delete index commands
@@ -28,7 +28,35 @@ namespace SearchIndexApp
 			//QueryPrice(srchclient);
 			//QuerySize(srchclient);
 			//QueryBrand(srchclient);
-			SearchGenerci(srchclient);
+			//SearchGenerci(srchclient);
+
+
+			SearchOptions options;
+			SearchResults<Item> response;
+
+			//Console.WriteLine("mostrami i caschi disponibili");
+			//query = Console.ReadLine();
+
+			options = new SearchOptions()
+			{
+				IncludeTotalCount = true,
+				Size = 5,
+				QueryType = Azure.Search.Documents.Models.SearchQueryType.Semantic,
+				SemanticSearch = new()
+				{
+					SemanticConfigurationName = "title",
+					QueryCaption = new(QueryCaptionType.Extractive)
+				}
+				
+			};
+
+			options.Select.Add("id");
+			options.Select.Add("link");
+			options.Select.Add("title");
+			options.Select.Add("description");
+
+			response = srchclient.Search<Item>("quali caschi avete", options);
+			WriteDocuments(response);
 
 		}
 
